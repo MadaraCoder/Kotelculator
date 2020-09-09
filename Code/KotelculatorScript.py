@@ -78,7 +78,11 @@ def add_symbol(symbol):
     global MathLabel
     global cleared
     global operatorList
-    if str(symbol) == '0' and not cleared and not locked:
+    if str(symbol) == '0' and not locked and MathString != '0':
+        MathString += str(symbol)
+        MathLabel.config(text=MathString)
+    if str(symbol) == '0' and locked and MathString != '0':
+        clear()
         MathString += str(symbol)
         MathLabel.config(text=MathString)
     elif not str(symbol).isdigit() and not locked:
@@ -86,7 +90,7 @@ def add_symbol(symbol):
            MathString[len(MathString) - 1] != '.':
             MathString += str(symbol)
             MathLabel.config(text=MathString)
-    elif str(symbol).isdigit() and not locked and str(symbol) != '0':
+    elif str(symbol).isdigit() and not locked and str(symbol) != '0' and MathString != '0':
         MathString += str(symbol)
         MathLabel.config(text=MathString)
         cleared = False
@@ -129,38 +133,6 @@ def evaluate():
 
 
 # Creating nine input buttons--------------------------------------------------
-
-# This is how i wanted to create them
-"""
-But1 = tk.Button(Kotel, background=Colors['BorderCol'],
-                 borderwidth=10, relief='groove', text='1',
-                 font='Terminal 44 bold')
-But2 = tk.Button(Kotel, background=Colors['BorderCol'],
-                 borderwidth=10, relief='groove', text='2',
-                 font='Terminal 44 bold')
-But3 = tk.Button(Kotel, background=Colors['BorderCol'],
-                 borderwidth=10, relief='groove', text='3',
-                 font='Terminal 44 bold')
-But4 = tk.Button(Kotel, background=Colors['BorderCol'],
-                 borderwidth=10, relief='groove', text='4',
-                 font='Terminal 44 bold')
-But5 = tk.Button(Kotel, background=Colors['BorderCol'],
-                 borderwidth=10, relief='groove', text='5',
-                 font='Terminal 44 bold')
-But6 = tk.Button(Kotel, background=Colors['BorderCol'],
-                 borderwidth=10, relief='groove', text='6',
-                 font='Terminal 44 bold')
-But7 = tk.Button(Kotel, background=Colors['BorderCol'],
-                 borderwidth=10, relief='groove', text='7',
-                 font='Terminal 44 bold')
-But8 = tk.Button(Kotel, background=Colors['BorderCol'],
-                 borderwidth=10, relief='groove', text='8',
-                 font='Terminal 44 bold')
-But9 = tk.Button(Kotel, background=Colors['BorderCol'],
-                 borderwidth=10, relief='groove', text='9',
-                 font='Terminal 44 bold')
-"""
-# This is how i created them later
 for i in range(1, 10):
     exec(f"""But{i} = tk.Button(Kotel, background=Colors['BgCol'],
         borderwidth=10, relief='groove', text='{i}',
@@ -231,22 +203,6 @@ ButEval = tk.Button(Kotel, background=Colors['YellowCol'],
 MathFrame.pack(fill=tk.X, side=tk.TOP)
 MathLabel.pack(fill=tk.X, side=tk.TOP)
 OutputLabel.pack(fill=tk.X, side=tk.TOP)
-
-
-# This is how i wanted to place input buttons
-"""
-But1.place(x=10, y=150, height=100, width=100)
-But2.place(x=10, y=150, height=100, width=100)
-But3.place(x=10, y=150, height=100, width=100)
-But4.place(x=120, y=260, height=100, width=100)
-But5.place(x=120, y=260, height=100, width=100)
-But6.place(x=120, y=260, height=100, width=100)
-But7.place(x=230, y=370, height=100, width=100)
-But8.place(x=230, y=370, height=100, width=100)
-But9.place(x=230, y=370, height=100, width=100)
-"""
-
-# This is how i placed them later
 
 # Placing input buttons using a loop-------------------------------------------
 xstart = 10
